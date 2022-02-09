@@ -8,11 +8,12 @@ function logger(req, res, next) {
 function validateUserId(req, res, next) {
   const { id } = req.params;
 
-  Users.findById(id)
+  Users.getById(id)
     .then(result => {
       if (result === null || result === undefined) {
         res.status(404).json({ message: "user not found" }  );
       } else {
+        req.user = result;
         next();
       }
     })

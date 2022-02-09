@@ -17,9 +17,8 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/:id', (req, res) => {
-  // RETURN THE USER OBJECT
-  // this needs a middleware to verify user id
+router.get('/:id', validateUserId, (req, res, next) => {
+  res.status(200).json(req.user);
 });
 
 router.post('/', (req, res) => {
